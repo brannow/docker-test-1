@@ -2,7 +2,7 @@
 # PHP application Docker container
 #######################################
 app:
-  build: .
+  build: ${BOLERPLATEROOT}
   dockerfile: Dockerfile.development
   links:
     - mysql
@@ -18,24 +18,22 @@ app:
     - "8443:443"
     - "10022:22"
   volumes:
-    - ${PROJECTROOT}/app/:/app/
+    - ${PROJECTROOT}/:/app/
     - /tmp/debug/:/tmp/debug/
     - ${BOLERPLATEROOT}/:/docker/
-  volumes_from:
-    - storage
   # cap and privileged needed for slowlog
   cap_add:
     - SYS_PTRACE
   privileged: true
   env_file:
-    - etc/environment.yml
-    - etc/environment.development.yml
+    - ${BOLERPLATEROOT}/etc/environment.yml
+    - ${BOLERPLATEROOT}/etc/environment.development.yml
 
 #######################################
 # MySQL server
 #######################################
 mysql:
-  build: docker/mysql
+  build: ${BOLERPLATEROOT}/docker/mysql
   dockerfile: MySQL-5.5
   #dockerfile: MySQL-5.6
   #dockerfile: MySQL-5.7
@@ -45,13 +43,11 @@ mysql:
   #dockerfile: Percona-5.6
   ports:
     - 13306:3306
-  volumes_from:
-    - storage
   volumes:
     - /tmp/debug/:/tmp/debug/
   env_file:
-    - etc/environment.yml
-    - etc/environment.development.yml
+    - ${BOLERPLATEROOT}/etc/environment.yml
+    - ${BOLERPLATEROOT}/etc/environment.development.yml
 
 #######################################
 # PostgreSQL server
@@ -144,7 +140,3 @@ mysql:
 #######################################
 # Storage
 #######################################
-storage:
-  build: docker/storage/
-  volumes:
-    - /storage
