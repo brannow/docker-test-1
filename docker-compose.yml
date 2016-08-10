@@ -34,15 +34,15 @@ app:
 #######################################
 mysql:
   build: ${BOLERPLATEROOT}/docker/mysql
-  dockerfile: MySQL-5.5
+  #dockerfile: MySQL-5.5
   #dockerfile: MySQL-5.6
-  #dockerfile: MySQL-5.7
+  dockerfile: MySQL-5.7
   #dockerfile: MariaDB-5.5
   #dockerfile: MariaDB-10
   #dockerfile: Percona-5.5
   #dockerfile: Percona-5.6
   ports:
-    - 13306:3306
+    - 13307:3306
   volumes:
     - /tmp/debug/:/tmp/debug/
   env_file:
@@ -66,7 +66,7 @@ mysql:
 # Solr server
 #######################################
 #solr:
-#  build: docker/solr/
+#  build: ${BOLERPLATEROOT}/docker/solr/
 #  ports:
 #    - 18983:8983
 #  volumes_from:
@@ -74,69 +74,73 @@ mysql:
 #  environment:
 #    - SOLR_STORAGE=/storage/solr/server-master/
 #  env_file:
-#    - etc/environment.yml
-#    - etc/environment.development.yml
+#    - ${BOLERPLATEROOT}/etc/environment.yml
+#    - ${BOLERPLATEROOT}/etc/environment.development.yml
 
 #######################################
 # Elasticsearch
 #######################################
 #elasticsearch:
-#  build: docker/elasticsearch/
+#  build: ${BOLERPLATEROOT}/docker/elasticsearch/
 #  ports:
 #    - 19200:9200
 #    - 19300:9300
 #  volumes_from:
 #    - storage
 #  env_file:
-#    - etc/environment.yml
-#    - etc/environment.development.yml
+#    - ${BOLERPLATEROOT}/etc/environment.yml
+#    - ${BOLERPLATEROOT}/etc/environment.development.yml
 
 #######################################
 # Redis
 #######################################
 #redis:
-#  build: docker/redis/
+#  build: ${BOLERPLATEROOT}/docker/redis/
 #  volumes_from:
 #    - storage
 #  env_file:
-#    - etc/environment.yml
-#    - etc/environment.development.yml
+#    - ${BOLERPLATEROOT}/etc/environment.yml
+#    - ${BOLERPLATEROOT}/etc/environment.development.yml
 
 #######################################
 # Memcached
 #######################################
 #memcached:
-#  build: docker/memcached/
+#  build: ${BOLERPLATEROOT}/docker/memcached/
 #  volumes_from:
 #    - storage
 #  env_file:
-#    - etc/environment.yml
-#    - etc/environment.development.yml
+#    - ${BOLERPLATEROOT}/etc/environment.yml
+#    - ${BOLERPLATEROOT}/etc/environment.development.yml
 
 #######################################
 # Mailcatcher
 #######################################
 #mail:
-#  build: docker/mail/
+#  build: ${BOLERPLATEROOT}/docker/mail/
 #  ports:
 #    - 1080:1080
 #  env_file:
-#    - etc/environment.yml
-#    - etc/environment.development.yml
+#    - ${BOLERPLATEROOT}/etc/environment.yml
+#    - ${BOLERPLATEROOT}/etc/environment.development.yml
 
 #######################################
 # FTP (vsftpd)
 #######################################
 #ftp:
-#  build: docker/vsftpd/
+#  build: ${BOLERPLATEROOT}/docker/vsftpd/
 #  volumes_from:
 #    - storage
 #  volumes:
 #    - ./:/application/
 #  env_file:
-#    - etc/environment.yml
-#    - etc/environment.development.yml
+#    - ${BOLERPLATEROOT}/etc/environment.yml
+#    - ${BOLERPLATEROOT}/etc/environment.development.yml
 
 #######################################
 # Storage
 #######################################
+#storage:
+ # build: ${BOLERPLATEROOT}/docker/storage/
+ # volumes:
+ #   - /storage
